@@ -1,0 +1,17 @@
+{
+  "name": "jev-typesafeai",
+  "version": "0.1.0",
+  "description": "Claude Code compaction hook that uses TypeSafe's Jev model to select which tool calls/results survive compaction, verbatim, instead of summarizing.",
+  "type": "module",
+  "main": "src/index.ts",
+  "scripts": {
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^5.6.0",
+    "vitest": "^2.1.0",
+    "@types/node": "^22.0.0"
+  }
+}
