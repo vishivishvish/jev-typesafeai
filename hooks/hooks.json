@@ -1,0 +1,12 @@
+{
+  "hooks": {
+    "session.compact": {
+      "handler": "./fast-jev.ts#onSessionCompact",
+      "description": "Replaces the default compaction summary with Jev-scored selective deletion."
+    },
+    "turn.complete": {
+      "handler": "./fast-jev.ts#onTurnComplete",
+      "description": "Proactively triggers compaction once context usage crosses compactAtPercent."
+    }
+  }
+}

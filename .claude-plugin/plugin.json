@@ -1,0 +1,44 @@
+{
+  "name": "jev-typesafeai",
+  "version": "0.1.0",
+  "description": "Verbatim, selective-deletion compaction for Claude Code, scored by TypeSafe's Jev model.",
+  "hooks": "../hooks/hooks.json",
+  "userConfig": {
+    "typesafeApiKey": {
+      "type": "string",
+      "description": "TypeSafe API key used to call the Jev model. Falls back to the TYPESAFE_API_KEY environment variable if unset.",
+      "sensitive": true,
+      "required": false
+    },
+    "compactAtPercent": {
+      "type": "number",
+      "description": "Context-window percent at which compaction is proactively triggered.",
+      "default": 60
+    },
+    "preserveRecentMessages": {
+      "type": "number",
+      "description": "Number of most-recent messages (plus the first message) that are never touched.",
+      "default": 6
+    },
+    "maxStateTokens": {
+      "type": "number",
+      "description": "Token budget for the conversation state sent to Jev.",
+      "default": 25000
+    },
+    "keepThreshold": {
+      "type": "number",
+      "description": "Score threshold (0-1) above which a tool call or result is kept.",
+      "default": 0.5
+    },
+    "truncateHeadChars": {
+      "type": "number",
+      "description": "Characters kept from a tool result when it is truncated rather than dropped.",
+      "default": 300
+    },
+    "minReductionRatio": {
+      "type": "number",
+      "description": "Minimum token-reduction ratio required to accept the Jev-compacted result; otherwise falls back to the default summary.",
+      "default": 0.25
+    }
+  }
+}
