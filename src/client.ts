@@ -1,10 +1,10 @@
 const TYPESAFE_ENDPOINT = "https://api.typesafe.ai/v1/systemone";
 
 export interface NoulQuestion {
-  /** Caller-assigned id so answers can be matched back to their tool call. */
+  /** Caller-chosen key; the answer comes back under the same key. */
   id: string;
-  question: string;
-  context: string;
+  instructions: string;
+  criteria?: { true?: string; false?: string };
 }
 
 export interface NoulAnswer {
@@ -16,17 +16,28 @@ export interface NoulAnswer {
 export class TypesafeClientError extends Error {}
 
 /**
- * Sends a batch of yes/no ("noul") questions to Jev and returns a
- * probability per question. Throws TypesafeClientError on any failure
- * (network, non-2xx, malformed response) so callers can fall back safely.
+ * Sends a batch of yes/no ("noul") questions to Jev, sharing a single
+ * `state` context across the batch, and returns a probability per
+ * question. Throws TypesafeClientError on any failure (network, non-2xx,
+ * malformed response) so callers can fall back safely.
  */
 export async function askNoulBatch(
   apiKey: string,
   model: string,
+  state: string,
   questions: NoulQuestion[]
 ): Promise<NoulAnswer[]> {
   if (!apiKey) {
     throw new TypesafeClientError("TYPESAFE_API_KEY is not set");
+  }
+
+  const questionsMap: Record<string, unknown> = {};
+  for (const q of questions) {
+    questionsMap[q.id] = {
+      type: "noul",
+      instructions: q.instructions,
+      ...(q.criteria ? { criteria: q.criteria } : {}),
+    };
   }
 
   let response: Response;
@@ -39,12 +50,8 @@ export async function askNoulBatch(
       },
       body: JSON.stringify({
         model,
-        type: "noul",
-        questions: questions.map((q) => ({
-          id: q.id,
-          question: q.question,
-          context: q.context,
-        })),
+        state,
+        questions: questionsMap,
       }),
     });
   } catch (err) {
@@ -62,12 +69,12 @@ export async function askNoulBatch(
     throw new TypesafeClientError("Jev response was not valid JSON");
   }
 
-  if (!payload || typeof payload !== "object" || !Array.isArray((payload as any).answers)) {
-    throw new TypesafeClientError("Jev response missing 'answers' array");
+  if (!payload || typeof payload !== "object" || typeof (payload as any).answers !== "object") {
+    throw new TypesafeClientError("Jev response missing 'answers' object");
   }
 
-  return (payload as any).answers.map((a: any) => ({
-    id: String(a.id),
-    probability: Number(a.probability),
+  return Object.entries((payload as any).answers).map(([id, answer]) => ({
+    id,
+    probability: Number((answer as any).noul),
   }));
 }
