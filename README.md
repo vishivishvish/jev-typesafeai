@@ -41,3 +41,17 @@ cp .env.example .env   # fill in TYPESAFE_API_KEY
 npm run typecheck
 npm test
 ```
+
+## Pending - 9 use cases for Jev (System 1 Model):
+
+From a Tweet
+
+- Re-ranking: Score and reorder retrieved results by relevance.
+- Tool pruning: Drop unused tools during context compaction.
+- Model routing: Route tasks to small, medium, or large LLMs.
+- Query routing: Decide between SQL, Vector DB, or Graph DB.
+- Cache admission: Filter which responses are worth caching.
+- Cache TTL prediction: Estimate how long cached results stay valid.
+- RAG retrieval control: Gate irrelevant retrieved documents.
+- Human escalation: Know when to hand off from AI to a human.
+- Action selection: Score and pick the best next agent action.
