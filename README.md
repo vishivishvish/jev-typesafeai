@@ -55,3 +55,5 @@ From a Tweet
 - RAG retrieval control: Gate irrelevant retrieved documents.
 - Human escalation: Know when to hand off from AI to a human.
 - Action selection: Score and pick the best next agent action.
+
+<!-- readme-grammar-pass: 2026-09-26 -->
