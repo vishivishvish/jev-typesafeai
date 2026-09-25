@@ -16,7 +16,7 @@ documented as not safe to write to.
 
 The reusable pieces from that attempt — a correct Jev API client and a
 couple of token-budget helpers — are kept in `src/`. The next direction is
-using Jev as a classifier inside hooks that actually support decision
+to use Jev as a classifier inside hooks that actually support decision
 control, such as `PreToolUse` (risk-gate a tool call) or `UserPromptSubmit`
 (classify/route a prompt, inject context).
 
