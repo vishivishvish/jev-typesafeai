@@ -1,6 +1,6 @@
 # jev-typesafeai
 
-A minimal client for TypeSafe AI's Jev model (`POST /v1/systemone`), used from
+A minimal client for TypeSafe AI's Jev model (`POST /v1/systemone`), used with
 Claude Code.
 
 ## Background
