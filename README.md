@@ -44,7 +44,7 @@ npm test
 
 ## Pending - 9 use cases for Jev (System 1 Model):
 
-From a Tweet
+From a tweet
 
 - Re-ranking: Score and reorder retrieved results by relevance.
 - Tool pruning: Drop unused tools during context compaction.
