@@ -5,7 +5,7 @@ Claude Code.
 
 ## Background
 
-This repo originally targeted the Claude Code compaction hooks
+This repository originally targeted the Claude Code compaction hooks
 (`PreCompact`/`PostCompact`) to replace the default lossy summary with
 verbatim, selective deletion scored by Jev. That turned out not to be
 possible: those hooks are purely observational — they receive
