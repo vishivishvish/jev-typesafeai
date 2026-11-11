@@ -16,7 +16,7 @@ documented as not safe to write to.
 
 The reusable pieces from that attempt — a correct Jev API client and a
 couple of token-budget helpers — are kept in `src/`. The next direction is
-to use Jev as a classifier inside hooks that support decision
+to use Jev as a classifier inside hooks that support decision-making
 control, such as `PreToolUse` (risk-gate a tool call) or `UserPromptSubmit`
 (classify/route a prompt, inject context).
 
@@ -56,4 +56,4 @@ From a Tweet
 - Human escalation: Know when to hand off from AI to a human.
 - Action selection: Score and pick the best next agent action.
 
-<!-- readme-grammar-pass: 2026-11-10 -->
+<!-- readme-grammar-pass: 2026-11-11 -->
