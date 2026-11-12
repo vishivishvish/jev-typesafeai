@@ -56,4 +56,4 @@ From a Tweet
 - Human escalation: Know when to hand off from AI to a human.
 - Action selection: Score and pick the best next agent action.
 
-<!-- readme-grammar-pass: 2026-11-11 -->
+<!-- readme-grammar-pass: 2026-11-12 -->
